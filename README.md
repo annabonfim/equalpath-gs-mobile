@@ -175,15 +175,13 @@ Este projeto atende aos requisitos da disciplina de Mobile Application Developme
 
 ## 👥 Integrantes do Grupo
 
-[Adicione os nomes dos integrantes do grupo aqui]
+1. Alane Rocha da Silva — RM561052
+2. Anna Beatriz de Araujo Bonfim — RM559561
+3. Maria Eduarda Araujo Penas — RM560944
 
 ## 🎥 Vídeo de Demonstração
 
 [Adicione o link do vídeo do YouTube aqui]
-
-## 📄 Descrição da Solução Global Solution
-
-[Adicione a descrição da solução escolhida na Global Solution aqui]
 
 ---
 
