@@ -6,24 +6,53 @@ EqualPath é um aplicativo mobile desenvolvido em React Native com Expo que ajud
 
 O aplicativo não oferece cursos nem vagas; apenas ajuda o usuário a entender quais trilhas de carreira se alinham melhor com seu perfil atual e quais habilidades precisam ser desenvolvidas.
 
+## 📸 Screenshots
+
+### Tela de Login
+![Login Screen](./screenshots/login.png)
+
+### Tela de Cadastro
+![SignUp Screen](./screenshots/signup.png)
+
+### Tela Inicial (Home)
+![Home Screen](./screenshots/home.png)
+
+### Explorar Trilhas
+![Trilhas Screen](./screenshots/trilhas.png)
+
+### Detalhes da Trilha
+![Trilha Detalhe Screen](./screenshots/trilha-detalhe.png)
+
+### Minhas Trilhas
+![Minhas Trilhas Screen](./screenshots/minhas-trilhas.png)
+
+### Perfil do Usuário
+![Perfil Screen](./screenshots/perfil.png)
+
 ## 🎯 Funcionalidades
 
-- **Login e Registro**: Autenticação básica com e-mail e senha
-- **Perfil do Usuário**: Cadastro de habilidades e área de interesse
-- **Trilhas de Carreira**: Visualização de diferentes trilhas disponíveis (Dados, Front-end, Customer Success, Suporte Técnico, UX/UI Design)
+- **Autenticação Completa**: Login e cadastro com persistência local (AsyncStorage)
+- **Perfil Personalizado**: Cadastro de habilidades e áreas de interesse
+- **Recomendações Inteligentes**: Trilhas recomendadas baseadas no perfil do usuário
+- **Exploração de Trilhas**: Visualização de todas as trilhas disponíveis com filtros
 - **Detalhes da Trilha**: 
-  - Descrição da trilha
-  - Habilidades necessárias
-  - Habilidades que o usuário já possui
-  - Habilidades que faltam
-  - Cursos recomendados com links externos
-- **Edição de Perfil**: Atualização de habilidades e área de interesse
+  - Descrição completa
+  - Habilidades necessárias (destacando possuídas e faltantes)
+  - Cursos recomendados com links
+  - Opção de seguir trilha
+  - Marcação de trilha como concluída
+- **Minhas Trilhas**: Visualização de trilhas seguidas com filtros (todas, em progresso, concluídas)
+- **Estatísticas**: Contador de trilhas concluídas e em progresso no perfil
+- **Edição de Perfil**: Atualização completa de dados pessoais e profissionais
 
 ## 🛠️ Tecnologias Utilizadas
 
 - **React Native** - Framework para desenvolvimento mobile
 - **Expo** - Plataforma para desenvolvimento React Native
 - **React Navigation** - Navegação entre telas (Stack Navigator e Bottom Tabs)
+- **AsyncStorage** - Persistência local de dados
+- **Expo Vector Icons** - Biblioteca de ícones (MaterialIcons)
+- **React Native Safe Area Context** - Gerenciamento de áreas seguras
 - **Dados Mockados** - Dados fictícios para demonstração (não requer backend)
 
 ## 📁 Estrutura do Projeto
@@ -33,22 +62,30 @@ equalpath/
 ├── src/
 │   ├── components/        # Componentes reutilizáveis
 │   │   ├── Button.js
-│   │   ├── Input.js
-│   │   └── Card.js
+│   │   └── Input.js
 │   ├── screens/          # Telas do aplicativo
 │   │   ├── LoginScreen.js
-│   │   ├── RegisterScreen.js
+│   │   ├── SignUpScreen.js
+│   │   ├── SignUpProfileScreen.js
 │   │   ├── HomeScreen.js
 │   │   ├── TrilhasScreen.js
 │   │   ├── TrilhaDetalheScreen.js
+│   │   ├── MinhasTrilhasScreen.js
 │   │   └── PerfilScreen.js
 │   ├── navigation/       # Configuração de navegação
-│   │   └── AppNavigator.js
+│   │   └── MainNavigator.js
 │   ├── data/            # Dados mockados
-│   │   └── mockData.js
+│   │   ├── areasAndSkills.js
+│   │   ├── trilhas.js
+│   │   └── userData.js
+│   ├── services/        # Serviços e lógica de negócio
+│   │   └── authService.js
+│   ├── utils/           # Utilitários
+│   │   └── stringUtils.js
 │   └── styles/          # Estilos e tema
-│       ├── theme.js
-│       └── globalStyles.js
+│       └── colors.js
+├── assets/              # Imagens e recursos
+│   └── logo-cameleon.png
 ├── App.js               # Arquivo principal
 └── package.json
 ```
@@ -106,18 +143,25 @@ npm start
 
 ## 🎨 Tema e Estilização
 
-O aplicativo utiliza um tema consistente com cores definidas em `src/styles/theme.js`:
-- **Primary**: Indigo (#6366F1)
-- **Secondary**: Pink (#EC4899)
+O aplicativo utiliza um tema consistente com cores definidas em `src/styles/colors.js`:
+- **Primary**: Teal (#3DA1A1)
+- **Primary Light**: Light Teal (#80CBC4)
+- **Secondary**: Cyan (#00ACC1)
 - **Background**: Light Gray (#F9FAFB)
 - **Surface**: White (#FFFFFF)
+- **Text**: Dark Gray (#1F2937)
+- **Text Light**: Gray (#6B7280)
+- **Border**: Light Gray (#E5E7EB)
+- **Error**: Red (#B00020)
 
 ## 📝 Notas Importantes
 
-- **Dados Mockados**: O aplicativo utiliza dados fictícios armazenados em `src/data/mockData.js`
+- **Persistência Local**: O aplicativo utiliza AsyncStorage para salvar dados do usuário localmente
+- **Dados Mockados**: Trilhas, áreas e habilidades são dados fictícios armazenados em `src/data/`
 - **Sem Backend**: Não há integração com API real (conforme requisitos do projeto acadêmico)
-- **Navegação**: Utiliza React Navigation com Stack Navigator para telas de autenticação e Bottom Tabs para telas principais
-- **Validações**: Validações básicas de campos obrigatórios e número mínimo de habilidades
+- **Navegação**: Utiliza React Navigation com Bottom Tabs (4 abas) e Stack Navigators aninhados
+- **Autenticação**: Sistema completo de login/cadastro com validação e proteção de rotas
+- **Trilhas Concluídas**: Sistema de marcação de trilhas como concluídas com estatísticas
 
 ## 📚 Requisitos Acadêmicos
 
