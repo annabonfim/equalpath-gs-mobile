@@ -109,37 +109,25 @@ npm start
 ## 📱 Telas do Aplicativo
 
 ### 1. LoginScreen
-- Campos de e-mail e senha
-- Botão para entrar
-- Link para criar conta
+<img width="356" height="775" alt="Screenshot 2025-11-20 at 7 38 54 PM" src="https://github.com/user-attachments/assets/d2ea4894-8755-41f8-b8fd-7ad47c8701ea" />
 
 ### 2. RegisterScreen
-- Campos: nome, e-mail, senha
-- Seleção de área de interesse (modal)
-- Adição de habilidades (mínimo 2)
-- Botão para criar conta
+<img width="360" height="779" alt="Screenshot 2025-11-20 at 7 39 04 PM" src="https://github.com/user-attachments/assets/53efa626-52db-4710-bd74-dfd97bed7c5a" />
+<img width="357" height="777" alt="Screenshot 2025-11-20 at 7 40 12 PM" src="https://github.com/user-attachments/assets/57787feb-167e-456b-b7d0-db07e5344efa" />
 
 ### 3. HomeScreen (Meu Caminho)
-- Resumo do perfil do usuário
-- Lista de trilhas recomendadas
-- Navegação para detalhes da trilha
+<img width="358" height="783" alt="Screenshot 2025-11-20 at 7 41 51 PM" src="https://github.com/user-attachments/assets/74fa21d7-5f70-498d-b231-f6d6631c494a" />
 
 ### 4. TrilhasScreen
-- Lista completa de todas as trilhas disponíveis
-- Navegação para detalhes de cada trilha
+<img width="357" height="777" alt="Screenshot 2025-11-20 at 7 42 03 PM" src="https://github.com/user-attachments/assets/c530511f-efc0-4c87-8ea0-a40b9f1868e4" />
+
 
 ### 5. TrilhaDetalheScreen
-- Descrição da trilha
-- Habilidades necessárias com níveis
-- Habilidades que o usuário já tem (em verde)
-- Habilidades que faltam (em amarelo)
-- Cursos recomendados com links externos
+<img width="356" height="773" alt="Screenshot 2025-11-20 at 8 10 39 PM" src="https://github.com/user-attachments/assets/5a3ec139-b0f5-4727-8869-83b904842fcb" />
 
 ### 6. PerfilScreen
-- Edição de nome
-- Edição de área de interesse
-- Edição de habilidades
-- Botão para salvar alterações
+<img width="368" height="779" alt="Screenshot 2025-11-20 at 7 42 40 PM" src="https://github.com/user-attachments/assets/4d0054b0-1f5f-43b0-913e-d02b7b464610" />
+
 
 ## 🎨 Tema e Estilização
 
@@ -168,7 +156,6 @@ O aplicativo utiliza um tema consistente com cores definidas em `src/styles/colo
 Este projeto atende aos requisitos da disciplina de Mobile Application Development:
 - ✅ Mínimo de 5 telas
 - ✅ Navegação entre telas (React Navigation)
-- ✅ CRUD mockado (Create, Read, Update, Delete de perfil e trilhas)
 - ✅ Estilização com cores, fontes e componentes personalizados
 - ✅ Arquitetura organizada com separação de componentes, telas, navegação e dados
 - ✅ Projeto funcional e pronto para demonstração
