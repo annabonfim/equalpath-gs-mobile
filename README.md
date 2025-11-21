@@ -6,29 +6,6 @@ EqualPath é um aplicativo mobile desenvolvido em React Native com Expo que ajud
 
 O aplicativo não oferece cursos nem vagas; apenas ajuda o usuário a entender quais trilhas de carreira se alinham melhor com seu perfil atual e quais habilidades precisam ser desenvolvidas.
 
-## 📸 Screenshots
-
-### Tela de Login
-![Login Screen](./screenshots/login.png)
-
-### Tela de Cadastro
-![SignUp Screen](./screenshots/signup.png)
-![SignUp Screen](./screenshots/signup-2.png)
-
-### Tela Inicial (Home)
-![Home Screen](./screenshots/home.png)
-
-### Explorar Trilhas
-![Trilhas Screen](./screenshots/trilhas.png)
-
-### Detalhes da Trilha
-![Trilha Detalhe Screen](./screenshots/trilha-detalhe.png)
-
-### Minhas Trilhas
-![Minhas Trilhas Screen](./screenshots/minhas-trilhas.png)
-
-### Perfil do Usuário
-![Perfil Screen](./screenshots/perfil.png)
 
 ## 🎯 Funcionalidades
 
