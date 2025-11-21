@@ -13,14 +13,47 @@ export const SignUpScreen = ({ onNavigateToLogin, onNavigateToProfile }) => {
   const [telefone, setTelefone] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleNext = () => {
-    // Validação comentada temporariamente
-    // if (!nome || !sobrenome || !email || !senha || !telefone) {
-    //   Alert.alert('Erro', 'Por favor, preencha todos os campos');
-    //   return;
-    // }
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
-    // Passa os dados para a próxima tela
+  const handleNext = () => {
+    if (!nome.trim()) {
+      Alert.alert('Erro', 'Por favor, preencha o nome');
+      return;
+    }
+
+    if (!sobrenome.trim()) {
+      Alert.alert('Erro', 'Por favor, preencha o sobrenome');
+      return;
+    }
+
+    if (!email.trim()) {
+      Alert.alert('Erro', 'Por favor, preencha o e-mail');
+      return;
+    }
+
+    if (!validateEmail(email.trim())) {
+      Alert.alert('Erro', 'Por favor, insira um e-mail válido');
+      return;
+    }
+
+    if (!senha) {
+      Alert.alert('Erro', 'Por favor, preencha a senha');
+      return;
+    }
+
+    if (senha.length < 5) {
+      Alert.alert('Erro', 'A senha deve ter no mínimo 5 caracteres');
+      return;
+    }
+
+    if (!telefone.trim()) {
+      Alert.alert('Erro', 'Por favor, preencha o telefone');
+      return;
+    }
+
     onNavigateToProfile({
       nome,
       sobrenome,

@@ -11,8 +11,13 @@ export const LoginScreen = ({ onNavigateToSignUp, onLogin }) => {
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
-    if (!email || !senha) {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos');
+    if (!email.trim()) {
+      Alert.alert('Erro', 'Por favor, preencha o e-mail');
+      return;
+    }
+
+    if (!senha) {
+      Alert.alert('Erro', 'Por favor, preencha a senha');
       return;
     }
 
