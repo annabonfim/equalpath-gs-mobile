@@ -124,7 +124,7 @@ O aplicativo utiliza um tema consistente com cores definidas em `src/styles/colo
 
 - **Persistência Local**: O aplicativo utiliza AsyncStorage para salvar dados do usuário localmente
 - **Dados Mockados**: Trilhas, áreas e habilidades são dados fictícios armazenados em `src/data/`
-- **Sem Backend**: Não há integração com API real (conforme requisitos do projeto acadêmico)
+- **Sem Backend**: Não há integração com API real
 - **Navegação**: Utiliza React Navigation com Bottom Tabs (4 abas) e Stack Navigators aninhados
 - **Autenticação**: Sistema completo de login/cadastro com validação e proteção de rotas
 - **Trilhas Concluídas**: Sistema de marcação de trilhas como concluídas com estatísticas
