@@ -7,13 +7,21 @@ import {
   TouchableOpacity,
   Linking,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
 import { colors } from '../styles/colors';
 import { getTrilhaById } from '../data/trilhas';
-import { getUserData, adicionarTrilha, removerTrilha, estaSeguindoTrilha, concluirTrilha, desmarcarTrilhaConcluida, estaTrilhaConcluida } from '../data/userData';
+import {
+  getUserData,
+  adicionarTrilha,
+  removerTrilha,
+  estaSeguindoTrilha,
+  concluirTrilha,
+  desmarcarTrilhaConcluida,
+  estaTrilhaConcluida,
+} from '../data/userData';
 import { SKILLS } from '../data/areasAndSkills';
 
 export const TrilhaDetalheScreen = ({ route, navigation }) => {
@@ -23,7 +31,7 @@ export const TrilhaDetalheScreen = ({ route, navigation }) => {
   const [seguindoTrilha, setSeguindoTrilha] = useState(false);
   const [trilhaConcluida, setTrilhaConcluida] = useState(false);
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     loadUserData();
   }, [trilhaId]);
@@ -32,10 +40,10 @@ export const TrilhaDetalheScreen = ({ route, navigation }) => {
     try {
       const data = await getUserData();
       setUserData(data);
-      
+
       const seguindo = await estaSeguindoTrilha(trilhaId);
       setSeguindoTrilha(seguindo);
-      
+
       const concluida = await estaTrilhaConcluida(trilhaId);
       setTrilhaConcluida(concluida);
     } catch (error) {
@@ -62,10 +70,7 @@ export const TrilhaDetalheScreen = ({ route, navigation }) => {
       <SafeAreaView style={styles.container} edges={['top']}>
         <View style={styles.errorContainer}>
           <Text style={styles.errorText}>Trilha não encontrada</Text>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => navigation.goBack()}
-          >
+          <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
             <Text style={styles.backButtonText}>Voltar</Text>
           </TouchableOpacity>
         </View>
@@ -74,19 +79,20 @@ export const TrilhaDetalheScreen = ({ route, navigation }) => {
   }
 
   let habilidadesDetalhadas = [];
-  
+
   if (trilha.habilidadesNecessarias && trilha.habilidadesNecessarias.length > 0) {
     habilidadesDetalhadas = trilha.habilidadesNecessarias.map(habilidade => {
-      const skill = SKILLS.find(s => 
-        s.nome.toLowerCase() === habilidade.nome.toLowerCase() ||
-        s.nome.toLowerCase().includes(habilidade.nome.toLowerCase()) ||
-        habilidade.nome.toLowerCase().includes(s.nome.toLowerCase())
+      const skill = SKILLS.find(
+        s =>
+          s.nome.toLowerCase() === habilidade.nome.toLowerCase() ||
+          s.nome.toLowerCase().includes(habilidade.nome.toLowerCase()) ||
+          habilidade.nome.toLowerCase().includes(s.nome.toLowerCase())
       );
-      
+
       return {
         nome: habilidade.nome,
         nivel: habilidade.nivel || 'Requerido',
-        skillId: skill?.id
+        skillId: skill?.id,
       };
     });
   } else if (trilha.skillsNecessarias && trilha.skillsNecessarias.length > 0) {
@@ -95,7 +101,7 @@ export const TrilhaDetalheScreen = ({ route, navigation }) => {
       return {
         nome: skill?.nome || skillId,
         nivel: 'Requerido',
-        skillId: skillId
+        skillId: skillId,
       };
     });
   }
@@ -105,9 +111,10 @@ export const TrilhaDetalheScreen = ({ route, navigation }) => {
       return true;
     }
     if (!habilidade.skillId) {
-      const skillId = SKILLS.find(s => 
-        s.nome.toLowerCase() === habilidade.nome.toLowerCase() ||
-        s.nome.toLowerCase().includes(habilidade.nome.toLowerCase())
+      const skillId = SKILLS.find(
+        s =>
+          s.nome.toLowerCase() === habilidade.nome.toLowerCase() ||
+          s.nome.toLowerCase().includes(habilidade.nome.toLowerCase())
       )?.id;
       return skillId && userSkills.includes(skillId);
     }
@@ -118,16 +125,17 @@ export const TrilhaDetalheScreen = ({ route, navigation }) => {
     if (habilidade.skillId) {
       return !userSkills.includes(habilidade.skillId);
     }
-    const skillId = SKILLS.find(s => 
-      s.nome.toLowerCase() === habilidade.nome.toLowerCase() ||
-      s.nome.toLowerCase().includes(habilidade.nome.toLowerCase())
+    const skillId = SKILLS.find(
+      s =>
+        s.nome.toLowerCase() === habilidade.nome.toLowerCase() ||
+        s.nome.toLowerCase().includes(habilidade.nome.toLowerCase())
     )?.id;
     return !skillId || !userSkills.includes(skillId);
   });
 
   const abrirLink = (cursoNome, url) => {
     const isGratuito = cursoNome.includes('[GRATUITO]');
-    
+
     const getPlataforma = () => {
       if (url && url.trim() !== '' && url.startsWith('http')) {
         return url;
@@ -166,10 +174,13 @@ export const TrilhaDetalheScreen = ({ route, navigation }) => {
             onPress: () => {
               Linking.openURL(getPlataforma()).catch(err => {
                 console.error('Erro ao abrir link:', err);
-                Alert.alert('Erro', 'Não foi possível abrir o link. Verifique sua conexão com a internet.');
+                Alert.alert(
+                  'Erro',
+                  'Não foi possível abrir o link. Verifique sua conexão com a internet.'
+                );
               });
-            }
-          }
+            },
+          },
         ]
       );
     }
@@ -219,16 +230,13 @@ export const TrilhaDetalheScreen = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <ScrollView 
+      <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.header}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => navigation.goBack()}
-          >
+          <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
             <MaterialIcons name="arrow-back" size={24} color={colors.text} />
           </TouchableOpacity>
           <View style={styles.headerRight}>
@@ -243,12 +251,17 @@ export const TrilhaDetalheScreen = ({ route, navigation }) => {
                 onPress={toggleConcluirTrilha}
                 activeOpacity={0.7}
               >
-                <MaterialIcons 
-                  name={trilhaConcluida ? "check-circle" : "check-circle-outline"} 
-                  size={20} 
-                  color={trilhaConcluida ? '#FFFFFF' : colors.secondary} 
+                <MaterialIcons
+                  name={trilhaConcluida ? 'check-circle' : 'check-circle-outline'}
+                  size={20}
+                  color={trilhaConcluida ? '#FFFFFF' : colors.secondary}
                 />
-                <Text style={[styles.completeButtonText, trilhaConcluida && styles.completeButtonTextActive]}>
+                <Text
+                  style={[
+                    styles.completeButtonText,
+                    trilhaConcluida && styles.completeButtonTextActive,
+                  ]}
+                >
                   {trilhaConcluida ? 'Concluída' : 'Concluir'}
                 </Text>
               </TouchableOpacity>
@@ -258,12 +271,14 @@ export const TrilhaDetalheScreen = ({ route, navigation }) => {
               onPress={toggleSeguirTrilha}
               activeOpacity={0.7}
             >
-              <MaterialIcons 
-                name={seguindoTrilha ? "bookmark" : "bookmark-border"} 
-                size={20} 
-                color={seguindoTrilha ? '#FFFFFF' : colors.primary} 
+              <MaterialIcons
+                name={seguindoTrilha ? 'bookmark' : 'bookmark-border'}
+                size={20}
+                color={seguindoTrilha ? '#FFFFFF' : colors.primary}
               />
-              <Text style={[styles.followButtonText, seguindoTrilha && styles.followButtonTextActive]}>
+              <Text
+                style={[styles.followButtonText, seguindoTrilha && styles.followButtonTextActive]}
+              >
                 {seguindoTrilha ? 'Seguindo' : 'Seguir'}
               </Text>
             </TouchableOpacity>
@@ -276,7 +291,7 @@ export const TrilhaDetalheScreen = ({ route, navigation }) => {
         {habilidadesDetalhadas.length > 0 && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Habilidades Necessárias</Text>
-            
+
             {habilidadesDoUsuario.length > 0 && (
               <View style={styles.subsection}>
                 <View style={styles.subsectionHeader}>

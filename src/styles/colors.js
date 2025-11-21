@@ -9,4 +9,3 @@ export const colors = {
   border: '#E5E7EB',
   error: '#B00020',
 };
-

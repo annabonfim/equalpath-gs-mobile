@@ -6,14 +6,13 @@ EqualPath é um aplicativo mobile desenvolvido em React Native com Expo que ajud
 
 O aplicativo não oferece cursos nem vagas; apenas ajuda o usuário a entender quais trilhas de carreira se alinham melhor com seu perfil atual e quais habilidades precisam ser desenvolvidas.
 
-
 ## 🎯 Funcionalidades
 
 - **Autenticação Completa**: Login e cadastro com persistência local (AsyncStorage)
 - **Perfil Personalizado**: Cadastro de habilidades e áreas de interesse
 - **Recomendações Inteligentes**: Trilhas recomendadas baseadas no perfil do usuário
 - **Exploração de Trilhas**: Visualização de todas as trilhas disponíveis com filtros
-- **Detalhes da Trilha**: 
+- **Detalhes da Trilha**:
   - Descrição completa
   - Habilidades necessárias (destacando possuídas e faltantes)
   - Cursos recomendados com links
@@ -31,6 +30,8 @@ O aplicativo não oferece cursos nem vagas; apenas ajuda o usuário a entender q
 - **AsyncStorage** - Persistência local de dados
 - **Expo Vector Icons** - Biblioteca de ícones (MaterialIcons)
 - **React Native Safe Area Context** - Gerenciamento de áreas seguras
+- **ESLint** - Linter para análise estática de código
+- **Prettier** - Formatador de código automático
 - **Dados Mockados** - Dados fictícios para demonstração (não requer backend)
 
 ## 📁 Estrutura do Projeto
@@ -38,44 +39,53 @@ O aplicativo não oferece cursos nem vagas; apenas ajuda o usuário a entender q
 ```
 equalpath/
 ├── src/
-│   ├── components/        # Componentes reutilizáveis
-│   │   ├── Button.js
-│   │   └── Input.js
-│   ├── screens/          # Telas do aplicativo
-│   │   ├── LoginScreen.js
-│   │   ├── SignUpScreen.js
-│   │   ├── SignUpProfileScreen.js
-│   │   ├── HomeScreen.js
-│   │   ├── TrilhasScreen.js
-│   │   ├── TrilhaDetalheScreen.js
-│   │   ├── MinhasTrilhasScreen.js
-│   │   └── PerfilScreen.js
-│   ├── navigation/       # Configuração de navegação
-│   │   └── MainNavigator.js
-│   ├── data/            # Dados mockados
+│   ├── components/        # Componentes reutilizáveis (.jsx)
+│   │   ├── Button.jsx
+│   │   └── Input.jsx
+│   ├── screens/          # Telas do aplicativo (.jsx)
+│   │   ├── LoginScreen.jsx
+│   │   ├── SignUpScreen.jsx
+│   │   ├── SignUpProfileScreen.jsx
+│   │   ├── HomeScreen.jsx
+│   │   ├── TrilhasScreen.jsx
+│   │   ├── TrilhaDetalheScreen.jsx
+│   │   ├── MinhasTrilhasScreen.jsx
+│   │   └── PerfilScreen.jsx
+│   ├── navigation/       # Configuração de navegação (.jsx)
+│   │   └── MainNavigator.jsx
+│   ├── data/            # Dados mockados (.js)
 │   │   ├── areasAndSkills.js
 │   │   ├── trilhas.js
 │   │   └── userData.js
-│   ├── services/        # Serviços e lógica de negócio
+│   ├── services/        # Serviços e lógica de negócio (.js)
 │   │   └── authService.js
-│   ├── utils/           # Utilitários
+│   ├── utils/           # Utilitários (.js)
 │   │   └── stringUtils.js
-│   └── styles/          # Estilos e tema
+│   └── styles/          # Estilos e tema (.js)
 │       └── colors.js
 ├── assets/              # Imagens e recursos
 │   └── logo-cameleon.png
-├── App.js               # Arquivo principal
+├── App.jsx              # Arquivo principal (componente React)
+├── index.jsx            # Ponto de entrada da aplicação
+├── .eslintrc.js         # Configuração do ESLint
+├── .prettierrc.js       # Configuração do Prettier
 └── package.json
 ```
+
+**Nota sobre extensões:**
+- Arquivos `.jsx`: Componentes React que contêm JSX (telas, componentes, navegação)
+- Arquivos `.js`: Utilitários, serviços, dados e configurações que não usam JSX
 
 ## 🚀 Como Executar
 
 1. **Instalar dependências:**
+
 ```bash
 npm install
 ```
 
 2. **Iniciar o aplicativo:**
+
 ```bash
 npm start
 ```
@@ -84,32 +94,43 @@ npm start
    - Escaneie o QR code com o app Expo Go (iOS) ou Expo Go (Android)
    - Ou pressione `i` para iOS simulator ou `a` para Android emulator
 
+**Comandos adicionais:**
+- `npm run lint` - Verificar problemas de código com ESLint
+- `npm run lint:fix` - Corrigir automaticamente problemas do ESLint
+- `npm run format` - Formatar código com Prettier
+- `npm run format:check` - Verificar formatação sem alterar arquivos
+
 ## 📱 Telas do Aplicativo
 
 ### 1. LoginScreen
+
 <img width="356" height="775" alt="Screenshot 2025-11-20 at 7 38 54 PM" src="https://github.com/user-attachments/assets/d2ea4894-8755-41f8-b8fd-7ad47c8701ea" />
 
 ### 2. RegisterScreen
+
 <img width="360" height="779" alt="Screenshot 2025-11-20 at 7 39 04 PM" src="https://github.com/user-attachments/assets/53efa626-52db-4710-bd74-dfd97bed7c5a" />
 <img width="357" height="777" alt="Screenshot 2025-11-20 at 7 40 12 PM" src="https://github.com/user-attachments/assets/57787feb-167e-456b-b7d0-db07e5344efa" />
 
 ### 3. HomeScreen (Meu Caminho)
+
 <img width="358" height="783" alt="Screenshot 2025-11-20 at 7 41 51 PM" src="https://github.com/user-attachments/assets/74fa21d7-5f70-498d-b231-f6d6631c494a" />
 
 ### 4. TrilhasScreen
+
 <img width="357" height="777" alt="Screenshot 2025-11-20 at 7 42 03 PM" src="https://github.com/user-attachments/assets/c530511f-efc0-4c87-8ea0-a40b9f1868e4" />
 
-
 ### 5. TrilhaDetalheScreen
+
 <img width="356" height="773" alt="Screenshot 2025-11-20 at 8 10 39 PM" src="https://github.com/user-attachments/assets/5a3ec139-b0f5-4727-8869-83b904842fcb" />
 
 ### 6. PerfilScreen
-<img width="368" height="779" alt="Screenshot 2025-11-20 at 7 42 40 PM" src="https://github.com/user-attachments/assets/4d0054b0-1f5f-43b0-913e-d02b7b464610" />
 
+<img width="368" height="779" alt="Screenshot 2025-11-20 at 7 42 40 PM" src="https://github.com/user-attachments/assets/4d0054b0-1f5f-43b0-913e-d02b7b464610" />
 
 ## 🎨 Tema e Estilização
 
 O aplicativo utiliza um tema consistente com cores definidas em `src/styles/colors.js`:
+
 - **Primary**: Teal (#3DA1A1)
 - **Primary Light**: Light Teal (#80CBC4)
 - **Secondary**: Cyan (#00ACC1)
@@ -132,10 +153,12 @@ O aplicativo utiliza um tema consistente com cores definidas em `src/styles/colo
 ## 📚 Requisitos Acadêmicos
 
 Este projeto atende aos requisitos da disciplina de Mobile Application Development:
-- ✅ Mínimo de 5 telas
+
+- ✅ Mínimo de 5 telas (8 telas implementadas)
 - ✅ Navegação entre telas (React Navigation)
 - ✅ Estilização com cores, fontes e componentes personalizados
 - ✅ Arquitetura organizada com separação de componentes, telas, navegação e dados
+- ✅ Uso adequado de ferramentas de lint/formatter (ESLint e Prettier)
 - ✅ Projeto funcional e pronto para demonstração
 
 ## 👥 Integrantes do Grupo
@@ -151,6 +174,3 @@ https://youtube.com/shorts/373pZBmiqY8?feature=share
 ---
 
 Desenvolvido para FIAP - Mobile Application Development
-
-
-

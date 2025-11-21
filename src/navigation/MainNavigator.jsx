@@ -16,7 +16,7 @@ const HomeStack = ({ onNavigateToTrilha }) => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="HomeMain">
-        {(props) => <HomeScreen {...props} onNavigateToTrilha={onNavigateToTrilha} />}
+        {props => <HomeScreen {...props} onNavigateToTrilha={onNavigateToTrilha} />}
       </Stack.Screen>
       <Stack.Screen name="TrilhaDetalhe" component={TrilhaDetalheScreen} />
     </Stack.Navigator>
@@ -58,7 +58,7 @@ export const MainNavigator = ({ onNavigateToTrilha, onLogout }) => {
           ),
         }}
       >
-        {(props) => <HomeStack {...props} onNavigateToTrilha={onNavigateToTrilha} />}
+        {props => <HomeStack {...props} onNavigateToTrilha={onNavigateToTrilha} />}
       </Tab.Screen>
       <Tab.Screen
         name="Trilhas"
@@ -69,7 +69,7 @@ export const MainNavigator = ({ onNavigateToTrilha, onLogout }) => {
           ),
         }}
       >
-        {(props) => {
+        {props => {
           const TrilhasStack = () => (
             <Stack.Navigator screenOptions={{ headerShown: false }}>
               <Stack.Screen name="TrilhasMain" component={TrilhasScreen} />
@@ -88,7 +88,7 @@ export const MainNavigator = ({ onNavigateToTrilha, onLogout }) => {
           ),
         }}
       >
-        {(props) => {
+        {props => {
           const MinhasTrilhasStack = () => (
             <Stack.Navigator screenOptions={{ headerShown: false }}>
               <Stack.Screen name="MinhasTrilhasMain" component={MinhasTrilhasScreen} />
@@ -107,9 +107,8 @@ export const MainNavigator = ({ onNavigateToTrilha, onLogout }) => {
           ),
         }}
       >
-        {(props) => <PerfilScreen {...props} onLogout={onLogout} />}
+        {props => <PerfilScreen {...props} onLogout={onLogout} />}
       </Tab.Screen>
     </Tab.Navigator>
   );
 };
-

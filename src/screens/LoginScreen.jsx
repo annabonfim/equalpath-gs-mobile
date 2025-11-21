@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import {View,Text,StyleSheet,ScrollView,KeyboardAvoidingView,Platform, Alert,TouchableOpacity,Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { colors } from '../styles/colors';
@@ -22,7 +32,7 @@ export const LoginScreen = ({ onNavigateToSignUp, onLogin }) => {
     }
 
     setLoading(true);
-    
+
     try {
       if (onLogin) {
         await onLogin(email.trim().toLowerCase(), senha);
@@ -42,10 +52,7 @@ export const LoginScreen = ({ onNavigateToSignUp, onLogin }) => {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
-      >
+      <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
         <View style={styles.header}>
           <Image
             source={require('../../assets/logo-cameleon.png')}
@@ -77,12 +84,7 @@ export const LoginScreen = ({ onNavigateToSignUp, onLogin }) => {
             onTogglePassword={() => setMostrarSenha(!mostrarSenha)}
           />
 
-          <Button
-            title="Entrar"
-            onPress={handleLogin}
-            loading={loading}
-            disabled={loading}
-          />
+          <Button title="Entrar" onPress={handleLogin} loading={loading} disabled={loading} />
 
           <View style={styles.signUpContainer}>
             <Text style={styles.signUpText}>Ainda não tem conta? </Text>

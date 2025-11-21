@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import {View,Text,StyleSheet,ScrollView,TouchableOpacity,ActivityIndicator} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../styles/colors';
 import { AREAS, SKILLS } from '../data/areasAndSkills';
@@ -35,7 +42,7 @@ export const HomeScreen = ({ navigation, onNavigateToTrilha }) => {
       </SafeAreaView>
     );
   }
-  
+
   if (!userData) {
     return (
       <SafeAreaView style={styles.safeArea} edges={['top']}>
@@ -50,7 +57,7 @@ export const HomeScreen = ({ navigation, onNavigateToTrilha }) => {
 
   const trilhasRecomendadas = recomendarTrilhas({
     areasSelecionadas: areasSelecionadas,
-    skillsSelecionadas: skillsSelecionadas
+    skillsSelecionadas: skillsSelecionadas,
   });
 
   const areasNomes = areasSelecionadas.map(areaId => {
@@ -65,88 +72,86 @@ export const HomeScreen = ({ navigation, onNavigateToTrilha }) => {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
-      <ScrollView 
-        style={styles.container} 
+      <ScrollView
+        style={styles.container}
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.header}>
-          <Text style={styles.greeting}>
-            Olá, {capitalizeWords(nome)}! 👋
-          </Text>
+          <Text style={styles.greeting}>Olá, {capitalizeWords(nome)}! 👋</Text>
           <Text style={styles.subtitle}>Bem-vindo ao seu caminho profissional</Text>
         </View>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Resumo do Perfil</Text>
-        <View style={styles.card}>
-          <View style={styles.cardSection}>
-            <Text style={styles.cardLabel}>Áreas de Interesse</Text>
-            <View style={styles.tagsContainer}>
-              {areasNomes.length > 0 ? (
-                areasNomes.map((area, index) => (
-                  <View key={index} style={styles.tag}>
-                    <Text style={styles.tagText}>{area}</Text>
-                  </View>
-                ))
-              ) : (
-                <Text style={styles.emptyText}>Nenhuma área selecionada</Text>
-              )}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Resumo do Perfil</Text>
+          <View style={styles.card}>
+            <View style={styles.cardSection}>
+              <Text style={styles.cardLabel}>Áreas de Interesse</Text>
+              <View style={styles.tagsContainer}>
+                {areasNomes.length > 0 ? (
+                  areasNomes.map((area, index) => (
+                    <View key={index} style={styles.tag}>
+                      <Text style={styles.tagText}>{area}</Text>
+                    </View>
+                  ))
+                ) : (
+                  <Text style={styles.emptyText}>Nenhuma área selecionada</Text>
+                )}
+              </View>
             </View>
-          </View>
 
-          <View style={[styles.cardSection, styles.cardSectionMargin]}>
-            <Text style={styles.cardLabel}>Habilidades</Text>
-            <View style={styles.tagsContainer}>
-              {skillsNomes.length > 0 ? (
-                skillsNomes.map((skill, index) => (
-                  <View key={index} style={styles.tag}>
-                    <Text style={styles.tagText}>{skill}</Text>
-                  </View>
-                ))
-              ) : (
-                <Text style={styles.emptyText}>Nenhuma habilidade selecionada</Text>
-              )}
+            <View style={[styles.cardSection, styles.cardSectionMargin]}>
+              <Text style={styles.cardLabel}>Habilidades</Text>
+              <View style={styles.tagsContainer}>
+                {skillsNomes.length > 0 ? (
+                  skillsNomes.map((skill, index) => (
+                    <View key={index} style={styles.tag}>
+                      <Text style={styles.tagText}>{skill}</Text>
+                    </View>
+                  ))
+                ) : (
+                  <Text style={styles.emptyText}>Nenhuma habilidade selecionada</Text>
+                )}
+              </View>
             </View>
           </View>
         </View>
-      </View>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Trilhas Recomendadas para Você</Text>
-        {trilhasRecomendadas.length > 0 ? (
-          trilhasRecomendadas.map((trilha) => (
-            <TouchableOpacity
-              key={trilha.id}
-              style={styles.trilhaCard}
-              onPress={() => {
-                if (navigation) {
-                  navigation.navigate('TrilhaDetalhe', { trilhaId: trilha.id });
-                } else if (onNavigateToTrilha) {
-                  onNavigateToTrilha(trilha.id);
-                }
-              }}
-              activeOpacity={0.7}
-            >
-              <View style={styles.trilhaHeader}>
-                <Text style={styles.trilhaNome}>{trilha.nome}</Text>
-                <View style={styles.badge}>
-                  <Text style={styles.badgeText}>
-                    {trilha.tipo === 'introdutoria' ? 'Iniciante' : 'Avançado'}
-                  </Text>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Trilhas Recomendadas para Você</Text>
+          {trilhasRecomendadas.length > 0 ? (
+            trilhasRecomendadas.map(trilha => (
+              <TouchableOpacity
+                key={trilha.id}
+                style={styles.trilhaCard}
+                onPress={() => {
+                  if (navigation) {
+                    navigation.navigate('TrilhaDetalhe', { trilhaId: trilha.id });
+                  } else if (onNavigateToTrilha) {
+                    onNavigateToTrilha(trilha.id);
+                  }
+                }}
+                activeOpacity={0.7}
+              >
+                <View style={styles.trilhaHeader}>
+                  <Text style={styles.trilhaNome}>{trilha.nome}</Text>
+                  <View style={styles.badge}>
+                    <Text style={styles.badgeText}>
+                      {trilha.tipo === 'introdutoria' ? 'Iniciante' : 'Avançado'}
+                    </Text>
+                  </View>
                 </View>
-              </View>
-              <Text style={styles.trilhaDescricao}>{trilha.descricao}</Text>
-            </TouchableOpacity>
-          ))
-        ) : (
-          <View style={styles.card}>
-            <Text style={styles.emptyText}>
-              Selecione áreas de interesse para ver trilhas recomendadas
-            </Text>
-          </View>
-        )}
-      </View>
+                <Text style={styles.trilhaDescricao}>{trilha.descricao}</Text>
+              </TouchableOpacity>
+            ))
+          ) : (
+            <View style={styles.card}>
+              <Text style={styles.emptyText}>
+                Selecione áreas de interesse para ver trilhas recomendadas
+              </Text>
+            </View>
+          )}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import {View, Text, StyleSheet, ScrollView, KeyboardAvoidingView, Platform, Alert, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { colors } from '../styles/colors';
@@ -13,7 +22,7 @@ export const SignUpScreen = ({ onNavigateToLogin, onNavigateToProfile }) => {
   const [telefone, setTelefone] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const validateEmail = (email) => {
+  const validateEmail = email => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
@@ -59,7 +68,7 @@ export const SignUpScreen = ({ onNavigateToLogin, onNavigateToProfile }) => {
       sobrenome,
       email,
       senha,
-      telefone
+      telefone,
     });
   };
 
@@ -68,10 +77,7 @@ export const SignUpScreen = ({ onNavigateToLogin, onNavigateToProfile }) => {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
-      >
+      <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
         <View style={styles.header}>
           <Text style={styles.title}>Criar Conta</Text>
           <Text style={styles.subtitle}>Preencha seus dados pessoais</Text>
@@ -122,12 +128,7 @@ export const SignUpScreen = ({ onNavigateToLogin, onNavigateToProfile }) => {
             keyboardType="phone-pad"
           />
 
-          <Button
-            title="Próximo"
-            onPress={handleNext}
-            loading={loading}
-            disabled={loading}
-          />
+          <Button title="Próximo" onPress={handleNext} loading={loading} disabled={loading} />
 
           <View style={styles.loginContainer}>
             <Text style={styles.loginText}>Já tem conta? </Text>

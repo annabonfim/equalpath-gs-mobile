@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
 import { colors } from '../styles/colors';
@@ -14,7 +21,7 @@ export const MinhasTrilhasScreen = ({ navigation }) => {
 
   useEffect(() => {
     loadTrilhas();
-    
+
     // Recarregar quando a tela ganhar foco (quando voltar de outra tela)
     const unsubscribe = navigation.addListener('focus', () => {
       loadTrilhas();
@@ -28,7 +35,7 @@ export const MinhasTrilhasScreen = ({ navigation }) => {
       const trilhasIds = await getMinhasTrilhas();
       const trilhas = trilhasIds.map(id => getTrilhaById(id)).filter(Boolean);
       setMinhasTrilhas(trilhas);
-      
+
       const concluidasIds = await getTrilhasConcluidas();
       const concluidas = concluidasIds.map(id => getTrilhaById(id)).filter(Boolean);
       setTrilhasConcluidas(concluidas);
@@ -40,17 +47,18 @@ export const MinhasTrilhasScreen = ({ navigation }) => {
   };
 
   // Filtrar trilhas baseado no filtro ativo
-  const trilhasEmProgresso = minhasTrilhas.filter(trilha => 
-    !trilhasConcluidas.some(c => c.id === trilha.id)
+  const trilhasEmProgresso = minhasTrilhas.filter(
+    trilha => !trilhasConcluidas.some(c => c.id === trilha.id)
   );
 
-  const trilhasParaExibir = filtroAtivo === 'concluidas' 
-    ? trilhasConcluidas 
-    : filtroAtivo === 'emProgresso'
-    ? trilhasEmProgresso
-    : minhasTrilhas;
+  const trilhasParaExibir =
+    filtroAtivo === 'concluidas'
+      ? trilhasConcluidas
+      : filtroAtivo === 'emProgresso'
+        ? trilhasEmProgresso
+        : minhasTrilhas;
 
-  const handleTrilhaPress = (trilhaId) => {
+  const handleTrilhaPress = trilhaId => {
     if (navigation) {
       navigation.navigate('TrilhaDetalhe', { trilhaId });
     }
@@ -68,8 +76,8 @@ export const MinhasTrilhasScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <ScrollView 
-        style={styles.scrollView} 
+      <ScrollView
+        style={styles.scrollView}
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
@@ -95,20 +103,33 @@ export const MinhasTrilhasScreen = ({ navigation }) => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.filterButton, filtroAtivo === 'emProgresso' && styles.filterButtonActive]}
+              style={[
+                styles.filterButton,
+                filtroAtivo === 'emProgresso' && styles.filterButtonActive,
+              ]}
               onPress={() => setFiltroAtivo('emProgresso')}
               activeOpacity={0.7}
             >
-              <Text style={[styles.filterText, filtroAtivo === 'emProgresso' && styles.filterTextActive]}>
+              <Text
+                style={[
+                  styles.filterText,
+                  filtroAtivo === 'emProgresso' && styles.filterTextActive,
+                ]}
+              >
                 Em Progresso ({trilhasEmProgresso.length})
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.filterButton, filtroAtivo === 'concluidas' && styles.filterButtonActive]}
+              style={[
+                styles.filterButton,
+                filtroAtivo === 'concluidas' && styles.filterButtonActive,
+              ]}
               onPress={() => setFiltroAtivo('concluidas')}
               activeOpacity={0.7}
             >
-              <Text style={[styles.filterText, filtroAtivo === 'concluidas' && styles.filterTextActive]}>
+              <Text
+                style={[styles.filterText, filtroAtivo === 'concluidas' && styles.filterTextActive]}
+              >
                 Concluídas ({trilhasConcluidas.length})
               </Text>
             </TouchableOpacity>
@@ -116,7 +137,7 @@ export const MinhasTrilhasScreen = ({ navigation }) => {
         )}
 
         {trilhasParaExibir.length > 0 ? (
-          trilhasParaExibir.map((trilha) => {
+          trilhasParaExibir.map(trilha => {
             const estaConcluida = trilhasConcluidas.some(c => c.id === trilha.id);
             return (
               <TouchableOpacity
@@ -128,7 +149,12 @@ export const MinhasTrilhasScreen = ({ navigation }) => {
                 <View style={styles.trilhaHeader}>
                   <View style={styles.trilhaHeaderLeft}>
                     {estaConcluida && (
-                      <MaterialIcons name="check-circle" size={20} color={colors.secondary} style={styles.checkIcon} />
+                      <MaterialIcons
+                        name="check-circle"
+                        size={20}
+                        color={colors.secondary}
+                        style={styles.checkIcon}
+                      />
                     )}
                     <Text style={styles.trilhaNome}>{trilha.nome}</Text>
                   </View>
@@ -152,11 +178,11 @@ export const MinhasTrilhasScreen = ({ navigation }) => {
         ) : (
           <View style={styles.card}>
             <Text style={styles.emptyText}>
-              {filtroAtivo === 'concluidas' 
+              {filtroAtivo === 'concluidas'
                 ? 'Você ainda não concluiu nenhuma trilha'
                 : filtroAtivo === 'emProgresso'
-                ? 'Você não tem trilhas em progresso no momento'
-                : 'Você ainda não começou nenhuma trilha'}
+                  ? 'Você não tem trilhas em progresso no momento'
+                  : 'Você ainda não começou nenhuma trilha'}
             </Text>
             <Text style={styles.emptySubtext}>
               {filtroAtivo === 'todas' && 'Acesse uma trilha recomendada e comece a segui-la'}
@@ -305,4 +331,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-

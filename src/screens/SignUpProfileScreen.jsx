@@ -9,7 +9,7 @@ import {
   Alert,
   TouchableOpacity,
   Modal,
-  FlatList
+  FlatList,
 } from 'react-native';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
@@ -30,7 +30,7 @@ export const SignUpProfileScreen = ({ userData, onNavigateToLogin, onComplete })
   // Obter todas as habilidades que ainda não foram selecionadas
   const availableSkills = SKILLS.filter(skill => !selectedSkills.includes(skill.id));
 
-  const toggleArea = (areaId) => {
+  const toggleArea = areaId => {
     if (selectedAreas.includes(areaId)) {
       setSelectedAreas(selectedAreas.filter(id => id !== areaId));
     } else {
@@ -38,7 +38,7 @@ export const SignUpProfileScreen = ({ userData, onNavigateToLogin, onComplete })
     }
   };
 
-  const toggleSkill = (skillId) => {
+  const toggleSkill = skillId => {
     if (selectedSkills.includes(skillId)) {
       setSelectedSkills(selectedSkills.filter(id => id !== skillId));
     } else {
@@ -46,7 +46,7 @@ export const SignUpProfileScreen = ({ userData, onNavigateToLogin, onComplete })
     }
   };
 
-  const adicionarHabilidade = (skillId) => {
+  const adicionarHabilidade = skillId => {
     if (!selectedSkills.includes(skillId)) {
       setSelectedSkills([...selectedSkills, skillId]);
     }
@@ -65,7 +65,7 @@ export const SignUpProfileScreen = ({ userData, onNavigateToLogin, onComplete })
     }
 
     setLoading(true);
-    
+
     try {
       // Salvar novo usuário no AsyncStorage
       await saveUser({
@@ -80,7 +80,7 @@ export const SignUpProfileScreen = ({ userData, onNavigateToLogin, onComplete })
 
       // Fazer login automático após cadastro
       await loginUser(userData.email.trim().toLowerCase(), userData.senha);
-      
+
       setLoading(false);
       Alert.alert('Sucesso', 'Conta criada com sucesso!', [
         {
@@ -91,12 +91,15 @@ export const SignUpProfileScreen = ({ userData, onNavigateToLogin, onComplete })
             } else {
               onNavigateToLogin();
             }
-          }
-        }
+          },
+        },
       ]);
     } catch (error) {
       setLoading(false);
-      Alert.alert('Erro ao criar conta', error.message || 'Não foi possível criar a conta. Tente novamente.');
+      Alert.alert(
+        'Erro ao criar conta',
+        error.message || 'Não foi possível criar a conta. Tente novamente.'
+      );
     }
   };
 
@@ -105,10 +108,7 @@ export const SignUpProfileScreen = ({ userData, onNavigateToLogin, onComplete })
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
-      >
+      <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
         <View style={styles.header}>
           <Text style={styles.title}>Perfil Profissional</Text>
           <Text style={styles.subtitle}>Complete seu perfil</Text>
@@ -118,13 +118,12 @@ export const SignUpProfileScreen = ({ userData, onNavigateToLogin, onComplete })
           {/* Seleção de Áreas */}
           <View style={styles.section}>
             <Text style={styles.label}>Áreas de Interesse *</Text>
-            <TouchableOpacity
-              style={styles.selectButton}
-              onPress={() => setModalAreaVisible(true)}
-            >
-              <Text style={[styles.selectText, selectedAreas.length === 0 && styles.placeholderText]}>
-                {selectedAreas.length === 0 
-                  ? 'Selecione uma ou mais áreas' 
+            <TouchableOpacity style={styles.selectButton} onPress={() => setModalAreaVisible(true)}>
+              <Text
+                style={[styles.selectText, selectedAreas.length === 0 && styles.placeholderText]}
+              >
+                {selectedAreas.length === 0
+                  ? 'Selecione uma ou mais áreas'
                   : `${selectedAreas.length} área(s) selecionada(s)`}
               </Text>
               <Text style={styles.selectArrow}>▼</Text>
@@ -159,24 +158,19 @@ export const SignUpProfileScreen = ({ userData, onNavigateToLogin, onComplete })
                 <Text style={styles.modalTitle}>Selecione as áreas de interesse</Text>
                 <FlatList
                   data={AREAS}
-                  keyExtractor={(item) => item.id}
+                  keyExtractor={item => item.id}
                   renderItem={({ item }) => {
                     const isSelected = selectedAreas.includes(item.id);
                     return (
                       <TouchableOpacity
-                        style={[
-                          styles.modalItem,
-                          isSelected && styles.modalItemSelected
-                        ]}
+                        style={[styles.modalItem, isSelected && styles.modalItemSelected]}
                         onPress={() => toggleArea(item.id)}
                       >
                         <Text
-                          style={[
-                            styles.modalItemText,
-                            isSelected && styles.modalItemTextSelected
-                          ]}
+                          style={[styles.modalItemText, isSelected && styles.modalItemTextSelected]}
                         >
-                          {isSelected ? '✓ ' : ''}{item.nome}
+                          {isSelected ? '✓ ' : ''}
+                          {item.nome}
                         </Text>
                       </TouchableOpacity>
                     );
@@ -195,9 +189,7 @@ export const SignUpProfileScreen = ({ userData, onNavigateToLogin, onComplete })
           {selectedAreas.length > 0 && (
             <View style={styles.section}>
               <Text style={styles.label}>Habilidades Sugeridas</Text>
-              <Text style={styles.hint}>
-                Baseado nas áreas selecionadas
-              </Text>
+              <Text style={styles.hint}>Baseado nas áreas selecionadas</Text>
 
               <View style={styles.skillsContainer}>
                 {suggestedSkills.map(skill => {
@@ -205,17 +197,14 @@ export const SignUpProfileScreen = ({ userData, onNavigateToLogin, onComplete })
                   return (
                     <TouchableOpacity
                       key={skill.id}
-                      style={[
-                        styles.skillChip,
-                        isSelected && styles.skillChipSelected
-                      ]}
+                      style={[styles.skillChip, isSelected && styles.skillChipSelected]}
                       onPress={() => toggleSkill(skill.id)}
                     >
-                      <Text style={[
-                        styles.skillChipText,
-                        isSelected && styles.skillChipTextSelected
-                      ]}>
-                        {isSelected ? '✓ ' : ''}{skill.nome}
+                      <Text
+                        style={[styles.skillChipText, isSelected && styles.skillChipTextSelected]}
+                      >
+                        {isSelected ? '✓ ' : ''}
+                        {skill.nome}
                       </Text>
                     </TouchableOpacity>
                   );
@@ -232,7 +221,7 @@ export const SignUpProfileScreen = ({ userData, onNavigateToLogin, onComplete })
               onPress={() => setModalSkillVisible(true)}
             >
               <Text style={[styles.selectText, styles.placeholderText]}>
-                {availableSkills.length > 0 
+                {availableSkills.length > 0
                   ? 'Selecione outras habilidades disponíveis'
                   : 'Todas as habilidades foram selecionadas'}
               </Text>
@@ -240,9 +229,7 @@ export const SignUpProfileScreen = ({ userData, onNavigateToLogin, onComplete })
             </TouchableOpacity>
 
             {availableSkills.length === 0 && selectedSkills.length > 0 && (
-              <Text style={styles.hint}>
-                Todas as habilidades foram selecionadas
-              </Text>
+              <Text style={styles.hint}>Todas as habilidades foram selecionadas</Text>
             )}
           </View>
 
@@ -257,14 +244,12 @@ export const SignUpProfileScreen = ({ userData, onNavigateToLogin, onComplete })
                 <Text style={styles.modalTitle}>Selecione uma habilidade</Text>
                 {availableSkills.length === 0 ? (
                   <View style={styles.emptyContainer}>
-                    <Text style={styles.emptyText}>
-                      Todas as habilidades foram selecionadas
-                    </Text>
+                    <Text style={styles.emptyText}>Todas as habilidades foram selecionadas</Text>
                   </View>
                 ) : (
                   <FlatList
                     data={availableSkills}
-                    keyExtractor={(item) => item.id}
+                    keyExtractor={item => item.id}
                     renderItem={({ item }) => (
                       <TouchableOpacity
                         style={styles.modalItem}

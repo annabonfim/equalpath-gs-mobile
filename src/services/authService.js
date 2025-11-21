@@ -20,16 +20,16 @@ export const getUsers = async () => {
 /**
  * Salva um novo usuário
  */
-export const saveUser = async (userData) => {
+export const saveUser = async userData => {
   try {
     const normalizedEmail = (userData.email || '').trim().toLowerCase();
     const users = await getUsers();
-    
+
     const userExists = users.find(u => {
       const userEmailNormalized = (u.email || '').trim().toLowerCase();
       return userEmailNormalized === normalizedEmail;
     });
-    
+
     if (userExists) {
       throw new Error('Este e-mail já está cadastrado');
     }
@@ -50,7 +50,7 @@ export const saveUser = async (userData) => {
 
     users.push(newUser);
     await AsyncStorage.setItem(USERS_KEY, JSON.stringify(users));
-    
+
     return newUser;
   } catch (error) {
     console.error('Erro ao salvar usuário:', error);
@@ -69,13 +69,13 @@ export const loginUser = async (email, senha) => {
       const userEmailNormalized = (u.email || '').trim().toLowerCase();
       return userEmailNormalized === normalizedEmail && u.senha === senha;
     });
-    
+
     if (!user) {
       throw new Error('E-mail ou senha incorretos');
     }
 
     await AsyncStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
-    
+
     return user;
   } catch (error) {
     console.error('Erro ao fazer login:', error);
@@ -99,7 +99,7 @@ export const getCurrentUser = async () => {
 /**
  * Atualiza os dados do usuário atual
  */
-export const updateCurrentUser = async (updatedData) => {
+export const updateCurrentUser = async updatedData => {
   try {
     const currentUser = await getCurrentUser();
     if (!currentUser) {
@@ -108,7 +108,7 @@ export const updateCurrentUser = async (updatedData) => {
 
     const users = await getUsers();
     const userIndex = users.findIndex(u => u.id === currentUser.id);
-    
+
     if (userIndex !== -1) {
       users[userIndex] = { ...users[userIndex], ...updatedData };
       await AsyncStorage.setItem(USERS_KEY, JSON.stringify(users));
@@ -116,7 +116,7 @@ export const updateCurrentUser = async (updatedData) => {
 
     const updatedUser = { ...currentUser, ...updatedData };
     await AsyncStorage.setItem(CURRENT_USER_KEY, JSON.stringify(updatedUser));
-    
+
     return updatedUser;
   } catch (error) {
     console.error('Erro ao atualizar usuário:', error);
@@ -148,4 +148,3 @@ export const isAuthenticated = async () => {
     return false;
   }
 };
-

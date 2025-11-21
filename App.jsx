@@ -13,10 +13,6 @@ export default function App() {
   const [currentScreen, setCurrentScreen] = useState(null);
   const [signUpData, setSignUpData] = useState(null);
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
   const checkAuth = async () => {
     try {
       const authenticated = await isAuthenticated();
@@ -26,6 +22,10 @@ export default function App() {
       setCurrentScreen('login');
     }
   };
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   const navigateToSignUp = () => {
     setSignUpData(null);
@@ -37,7 +37,7 @@ export default function App() {
     setCurrentScreen('login');
   };
 
-  const navigateToProfile = (data) => {
+  const navigateToProfile = data => {
     setSignUpData(data);
     setCurrentScreen('signupProfile');
   };
@@ -51,7 +51,7 @@ export default function App() {
     }
   };
 
-  const navigateToTrilha = (trilhaId) => {
+  const navigateToTrilha = trilhaId => {
     console.log('Navegar para trilha:', trilhaId);
   };
 
@@ -79,10 +79,7 @@ export default function App() {
     return (
       <>
         <NavigationContainer independent={true}>
-          <MainNavigator 
-            onNavigateToTrilha={navigateToTrilha}
-            onLogout={handleLogout}
-          />
+          <MainNavigator onNavigateToTrilha={navigateToTrilha} onLogout={handleLogout} />
         </NavigationContainer>
         <StatusBar style="light" backgroundColor={colors.primary} />
       </>
@@ -92,19 +89,13 @@ export default function App() {
   return (
     <>
       {currentScreen === 'login' && (
-        <LoginScreen 
-          onNavigateToSignUp={navigateToSignUp}
-          onLogin={handleLogin}
-        />
+        <LoginScreen onNavigateToSignUp={navigateToSignUp} onLogin={handleLogin} />
       )}
       {currentScreen === 'signup' && (
-        <SignUpScreen 
-          onNavigateToLogin={navigateToLogin}
-          onNavigateToProfile={navigateToProfile}
-        />
+        <SignUpScreen onNavigateToLogin={navigateToLogin} onNavigateToProfile={navigateToProfile} />
       )}
       {currentScreen === 'signupProfile' && (
-        <SignUpProfileScreen 
+        <SignUpProfileScreen
           userData={signUpData}
           onNavigateToLogin={navigateToLogin}
           onComplete={() => setCurrentScreen('home')}

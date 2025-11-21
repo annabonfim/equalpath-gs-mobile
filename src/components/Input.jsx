@@ -3,16 +3,16 @@ import { View, TextInput, Text, StyleSheet, TouchableOpacity } from 'react-nativ
 import { MaterialIcons } from '@expo/vector-icons';
 import { colors } from '../styles/colors';
 
-export const Input = ({ 
-  label, 
-  value, 
-  onChangeText, 
-  placeholder, 
-  secureTextEntry, 
-  keyboardType, 
+export const Input = ({
+  label,
+  value,
+  onChangeText,
+  placeholder,
+  secureTextEntry,
+  keyboardType,
   autoCapitalize,
   showPasswordIcon,
-  onTogglePassword
+  onTogglePassword,
 }) => {
   return (
     <View style={styles.container}>
@@ -35,7 +35,7 @@ export const Input = ({
             activeOpacity={0.7}
           >
             <MaterialIcons
-              name={secureTextEntry ? "visibility" : "visibility-off"}
+              name={secureTextEntry ? 'visibility' : 'visibility-off'}
               size={20}
               color={colors.textLight}
             />

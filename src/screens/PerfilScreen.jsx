@@ -10,7 +10,7 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -27,7 +27,7 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
   const [loading, setLoading] = useState(false);
   const [loadingInitial, setLoadingInitial] = useState(true);
   const [estatisticas, setEstatisticas] = useState({ trilhasConcluidas: 0, trilhasEmProgresso: 0 });
-  
+
   // Estados para edição
   const [nomeEditado, setNomeEditado] = useState('');
   const [sobrenomeEditado, setSobrenomeEditado] = useState('');
@@ -35,7 +35,7 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
   const [telefoneEditado, setTelefoneEditado] = useState('');
   const [selectedAreasEditado, setSelectedAreasEditado] = useState([]);
   const [selectedSkillsEditado, setSelectedSkillsEditado] = useState([]);
-  
+
   // Estados para modais
   const [modalAreaVisible, setModalAreaVisible] = useState(false);
   const [modalSkillVisible, setModalSkillVisible] = useState(false);
@@ -62,7 +62,7 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
       const concluidasIds = trilhasConcluidas || [];
       const emProgressoIds = trilhasEmProgresso || [];
       const emProgressoCount = emProgressoIds.filter(id => !concluidasIds.includes(id)).length;
-      
+
       setEstatisticas({
         trilhasConcluidas: concluidasIds.length,
         trilhasEmProgresso: emProgressoCount,
@@ -84,14 +84,14 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
         setSelectedAreasEditado(data.areasSelecionadas || []);
         setSelectedSkillsEditado(data.skillsSelecionadas || []);
       }
-      
+
       // Carregar estatísticas
       const trilhasConcluidas = await getTrilhasConcluidas();
       const trilhasEmProgresso = await getMinhasTrilhas();
       const concluidasIds = trilhasConcluidas || [];
       const emProgressoIds = trilhasEmProgresso || [];
       const emProgressoCount = emProgressoIds.filter(id => !concluidasIds.includes(id)).length;
-      
+
       setEstatisticas({
         trilhasConcluidas: concluidasIds.length,
         trilhasEmProgresso: emProgressoCount,
@@ -123,8 +123,15 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
     );
   }
 
-  const { nome, sobrenome, email, telefone, areasSelecionadas = [], skillsSelecionadas = [] } = userData;
-  
+  const {
+    nome,
+    sobrenome,
+    email,
+    telefone,
+    areasSelecionadas = [],
+    skillsSelecionadas = [],
+  } = userData;
+
   // Para exibição (mostra dados editados se estiver editando, senão mostra dados originais)
   const areasExibidas = editando ? selectedAreasEditado : areasSelecionadas;
   const skillsExibidas = editando ? selectedSkillsEditado : skillsSelecionadas;
@@ -141,9 +148,11 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
 
   // Obter habilidades sugeridas baseado nas áreas selecionadas
   const suggestedSkills = editando ? getSuggestedSkills(selectedAreasEditado) : [];
-  const availableSkills = editando ? SKILLS.filter(skill => !selectedSkillsEditado.includes(skill.id)) : [];
+  const availableSkills = editando
+    ? SKILLS.filter(skill => !selectedSkillsEditado.includes(skill.id))
+    : [];
 
-  const toggleArea = (areaId) => {
+  const toggleArea = areaId => {
     if (selectedAreasEditado.includes(areaId)) {
       setSelectedAreasEditado(selectedAreasEditado.filter(id => id !== areaId));
     } else {
@@ -151,7 +160,7 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
     }
   };
 
-  const toggleSkill = (skillId) => {
+  const toggleSkill = skillId => {
     if (selectedSkillsEditado.includes(skillId)) {
       setSelectedSkillsEditado(selectedSkillsEditado.filter(id => id !== skillId));
     } else {
@@ -159,7 +168,7 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
     }
   };
 
-  const adicionarHabilidade = (skillId) => {
+  const adicionarHabilidade = skillId => {
     if (!selectedSkillsEditado.includes(skillId)) {
       setSelectedSkillsEditado([...selectedSkillsEditado, skillId]);
     }
@@ -168,7 +177,7 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
 
   const handleSalvar = async () => {
     setLoading(true);
-    
+
     try {
       const updatedData = {
         nome: capitalizeWords(nomeEditado),
@@ -176,14 +185,14 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
         email: emailEditado.trim().toLowerCase(),
         telefone: telefoneEditado,
         areasSelecionadas: selectedAreasEditado,
-        skillsSelecionadas: selectedSkillsEditado
+        skillsSelecionadas: selectedSkillsEditado,
       };
 
       await setUserData(updatedData);
-      
+
       // Atualizar o estado local
       setUserDataState({ ...userData, ...updatedData });
-      
+
       setEditando(false);
       Alert.alert('Sucesso', 'Perfil atualizado com sucesso!');
     } catch (error) {
@@ -211,8 +220,8 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
         style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        <ScrollView 
-          style={styles.scrollView} 
+        <ScrollView
+          style={styles.scrollView}
           contentContainerStyle={styles.content}
           showsVerticalScrollIndicator={false}
         >
@@ -303,7 +312,9 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
                 <>
                   <View style={styles.infoRow}>
                     <Text style={styles.infoLabel}>Nome:</Text>
-                    <Text style={styles.infoValue}>{capitalizeWords(nome)} {capitalizeWords(sobrenome)}</Text>
+                    <Text style={styles.infoValue}>
+                      {capitalizeWords(nome)} {capitalizeWords(sobrenome)}
+                    </Text>
                   </View>
                   <View style={styles.infoRow}>
                     <Text style={styles.infoLabel}>E-mail:</Text>
@@ -327,9 +338,16 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
                     style={styles.selectButton}
                     onPress={() => setModalAreaVisible(true)}
                   >
-                    <Text style={[styles.selectText, selectedAreasEditado.length === 0 && styles.placeholderText]}>
+                    <Text
+                      style={[
+                        styles.selectText,
+                        selectedAreasEditado.length === 0 && styles.placeholderText,
+                      ]}
+                    >
                       {selectedAreasEditado.length > 0
-                        ? selectedAreasEditado.map(id => AREAS.find(a => a.id === id)?.nome).join(', ')
+                        ? selectedAreasEditado
+                            .map(id => AREAS.find(a => a.id === id)?.nome)
+                            .join(', ')
                         : 'Selecione suas áreas'}
                     </Text>
                     <Text style={styles.selectArrow}>▼</Text>
@@ -380,7 +398,9 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
                       style={[styles.skillChip, isSelected && styles.skillChipSelected]}
                       onPress={() => toggleSkill(skill.id)}
                     >
-                      <Text style={[styles.skillChipText, isSelected && styles.skillChipTextSelected]}>
+                      <Text
+                        style={[styles.skillChipText, isSelected && styles.skillChipTextSelected]}
+                      >
                         {skill.nome} {isSelected ? '✓' : ''}
                       </Text>
                     </TouchableOpacity>
@@ -440,7 +460,7 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
                 onPress={() => {
                   Alert.alert('Sair', 'Deseja realmente sair?', [
                     { text: 'Cancelar', style: 'cancel' },
-                    { text: 'Sair', style: 'destructive', onPress: onLogout }
+                    { text: 'Sair', style: 'destructive', onPress: onLogout },
                   ]);
                 }}
                 activeOpacity={0.7}
@@ -463,19 +483,19 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
               <Text style={styles.modalTitle}>Selecione suas áreas</Text>
               <FlatList
                 data={AREAS}
-                keyExtractor={(item) => item.id}
+                keyExtractor={item => item.id}
                 renderItem={({ item }) => (
                   <TouchableOpacity
                     style={[
                       styles.modalItem,
-                      selectedAreasEditado.includes(item.id) && styles.modalItemSelected
+                      selectedAreasEditado.includes(item.id) && styles.modalItemSelected,
                     ]}
                     onPress={() => toggleArea(item.id)}
                   >
                     <Text
                       style={[
                         styles.modalItemText,
-                        selectedAreasEditado.includes(item.id) && styles.modalItemTextSelected
+                        selectedAreasEditado.includes(item.id) && styles.modalItemTextSelected,
                       ]}
                     >
                       {item.nome}
@@ -483,10 +503,7 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
                   </TouchableOpacity>
                 )}
               />
-              <Button
-                title="Fechar"
-                onPress={() => setModalAreaVisible(false)}
-              />
+              <Button title="Fechar" onPress={() => setModalAreaVisible(false)} />
             </View>
           </View>
         </Modal>
@@ -503,14 +520,12 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
               <Text style={styles.modalTitle}>Selecione uma habilidade</Text>
               {availableSkills.length === 0 ? (
                 <View style={styles.emptyContainer}>
-                  <Text style={styles.emptyText}>
-                    Todas as habilidades foram selecionadas
-                  </Text>
+                  <Text style={styles.emptyText}>Todas as habilidades foram selecionadas</Text>
                 </View>
               ) : (
                 <FlatList
                   data={availableSkills}
-                  keyExtractor={(item) => item.id}
+                  keyExtractor={item => item.id}
                   renderItem={({ item }) => (
                     <TouchableOpacity
                       style={styles.modalItem}
@@ -521,10 +536,7 @@ export const PerfilScreen = ({ onLogout, navigation }) => {
                   )}
                 />
               )}
-              <Button
-                title="Fechar"
-                onPress={() => setModalSkillVisible(false)}
-              />
+              <Button title="Fechar" onPress={() => setModalSkillVisible(false)} />
             </View>
           </View>
         </Modal>

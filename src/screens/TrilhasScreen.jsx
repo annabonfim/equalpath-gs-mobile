@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity
-} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
 import { colors } from '../styles/colors';
@@ -34,29 +28,27 @@ export const TrilhasScreen = ({ navigation }) => {
     trilhasFiltradas = trilhasFiltradas.filter(t => t.area === areaFiltro);
   }
 
-  const handleTrilhaPress = (trilhaId) => {
+  const handleTrilhaPress = trilhaId => {
     if (navigation) {
       navigation.navigate('TrilhaDetalhe', { trilhaId });
     }
   };
 
-  const obterNomeArea = (areaId) => {
+  const obterNomeArea = areaId => {
     const area = AREAS.find(a => a.id === areaId);
     return area?.nome || areaId;
   };
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <ScrollView 
+      <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.header}>
           <Text style={styles.title}>Trilhas Disponíveis</Text>
-          <Text style={styles.subtitle}>
-            {trilhasFiltradas.length} trilha(s) encontrada(s)
-          </Text>
+          <Text style={styles.subtitle}>{trilhasFiltradas.length} trilha(s) encontrada(s)</Text>
         </View>
 
         {/* Filtros */}
@@ -69,16 +61,29 @@ export const TrilhasScreen = ({ navigation }) => {
                 onPress={() => setFiltro('todas')}
                 activeOpacity={0.7}
               >
-                <Text style={[styles.filtroButtonText, filtro === 'todas' && styles.filtroButtonTextActive]}>
+                <Text
+                  style={[
+                    styles.filtroButtonText,
+                    filtro === 'todas' && styles.filtroButtonTextActive,
+                  ]}
+                >
                   Todas
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.filtroButton, filtro === 'introdutoria' && styles.filtroButtonActive]}
+                style={[
+                  styles.filtroButton,
+                  filtro === 'introdutoria' && styles.filtroButtonActive,
+                ]}
                 onPress={() => setFiltro('introdutoria')}
                 activeOpacity={0.7}
               >
-                <Text style={[styles.filtroButtonText, filtro === 'introdutoria' && styles.filtroButtonTextActive]}>
+                <Text
+                  style={[
+                    styles.filtroButtonText,
+                    filtro === 'introdutoria' && styles.filtroButtonTextActive,
+                  ]}
+                >
                   Iniciante
                 </Text>
               </TouchableOpacity>
@@ -87,7 +92,12 @@ export const TrilhasScreen = ({ navigation }) => {
                 onPress={() => setFiltro('avancada')}
                 activeOpacity={0.7}
               >
-                <Text style={[styles.filtroButtonText, filtro === 'avancada' && styles.filtroButtonTextActive]}>
+                <Text
+                  style={[
+                    styles.filtroButtonText,
+                    filtro === 'avancada' && styles.filtroButtonTextActive,
+                  ]}
+                >
                   Avançado
                 </Text>
               </TouchableOpacity>
@@ -96,24 +106,44 @@ export const TrilhasScreen = ({ navigation }) => {
 
           <View style={styles.filtroSection}>
             <Text style={styles.filtroLabel}>Área:</Text>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.areaFiltroScroll}>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={styles.areaFiltroScroll}
+            >
               <TouchableOpacity
-                style={[styles.areaFiltroButton, areaFiltro === 'todas' && styles.areaFiltroButtonActive]}
+                style={[
+                  styles.areaFiltroButton,
+                  areaFiltro === 'todas' && styles.areaFiltroButtonActive,
+                ]}
                 onPress={() => setAreaFiltro('todas')}
                 activeOpacity={0.7}
               >
-                <Text style={[styles.areaFiltroButtonText, areaFiltro === 'todas' && styles.areaFiltroButtonTextActive]}>
+                <Text
+                  style={[
+                    styles.areaFiltroButtonText,
+                    areaFiltro === 'todas' && styles.areaFiltroButtonTextActive,
+                  ]}
+                >
                   Todas
                 </Text>
               </TouchableOpacity>
               {AREAS.map(area => (
                 <TouchableOpacity
                   key={area.id}
-                  style={[styles.areaFiltroButton, areaFiltro === area.id && styles.areaFiltroButtonActive]}
+                  style={[
+                    styles.areaFiltroButton,
+                    areaFiltro === area.id && styles.areaFiltroButtonActive,
+                  ]}
                   onPress={() => setAreaFiltro(area.id)}
                   activeOpacity={0.7}
                 >
-                  <Text style={[styles.areaFiltroButtonText, areaFiltro === area.id && styles.areaFiltroButtonTextActive]}>
+                  <Text
+                    style={[
+                      styles.areaFiltroButtonText,
+                      areaFiltro === area.id && styles.areaFiltroButtonTextActive,
+                    ]}
+                  >
                     {area.nome}
                   </Text>
                 </TouchableOpacity>
@@ -124,7 +154,7 @@ export const TrilhasScreen = ({ navigation }) => {
 
         {/* Lista de Trilhas */}
         {trilhasFiltradas.length > 0 ? (
-          trilhasFiltradas.map((trilha) => (
+          trilhasFiltradas.map(trilha => (
             <TouchableOpacity
               key={trilha.id}
               style={styles.trilhaCard}
@@ -152,12 +182,8 @@ export const TrilhasScreen = ({ navigation }) => {
         ) : (
           <View style={styles.card}>
             <MaterialIcons name="search-off" size={48} color={colors.textLight} />
-            <Text style={styles.emptyText}>
-              Nenhuma trilha encontrada
-            </Text>
-            <Text style={styles.emptySubtext}>
-              Tente ajustar os filtros
-            </Text>
+            <Text style={styles.emptyText}>Nenhuma trilha encontrada</Text>
+            <Text style={styles.emptySubtext}>Tente ajustar os filtros</Text>
           </View>
         )}
       </ScrollView>
