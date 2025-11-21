@@ -104,28 +104,33 @@ npm start
 
 ### 1. LoginScreen
 
-<img width="356" height="775" alt="Screenshot 2025-11-20 at 7 38 54 PM" src="https://github.com/user-attachments/assets/d2ea4894-8755-41f8-b8fd-7ad47c8701ea" />
+<img src="screenshots/login.png" alt="LoginScreen" width="300" />
 
-### 2. RegisterScreen
+### 2. RegisterScreen (SignUpScreen)
 
-<img width="360" height="779" alt="Screenshot 2025-11-20 at 7 39 04 PM" src="https://github.com/user-attachments/assets/53efa626-52db-4710-bd74-dfd97bed7c5a" />
-<img width="357" height="777" alt="Screenshot 2025-11-20 at 7 40 12 PM" src="https://github.com/user-attachments/assets/57787feb-167e-456b-b7d0-db07e5344efa" />
+<img src="screenshots/signup.png" alt="SignUpScreen - Dados Pessoais" width="300" />
+
+<img src="screenshots/signup-2.png" alt="SignUpProfileScreen - Perfil Profissional" width="300" />
 
 ### 3. HomeScreen (Meu Caminho)
 
-<img width="358" height="783" alt="Screenshot 2025-11-20 at 7 41 51 PM" src="https://github.com/user-attachments/assets/74fa21d7-5f70-498d-b231-f6d6631c494a" />
+<img src="screenshots/home.png" alt="HomeScreen" width="300" />
 
 ### 4. TrilhasScreen
 
-<img width="357" height="777" alt="Screenshot 2025-11-20 at 7 42 03 PM" src="https://github.com/user-attachments/assets/c530511f-efc0-4c87-8ea0-a40b9f1868e4" />
+<img src="screenshots/trilhas.png" alt="TrilhasScreen" width="300" />
 
 ### 5. TrilhaDetalheScreen
 
-<img width="356" height="773" alt="Screenshot 2025-11-20 at 8 10 39 PM" src="https://github.com/user-attachments/assets/5a3ec139-b0f5-4727-8869-83b904842fcb" />
+<img src="screenshots/trilha-detalhe.png" alt="TrilhaDetalheScreen" width="300" />
 
-### 6. PerfilScreen
+### 6. Minhas Trilhas
 
-<img width="368" height="779" alt="Screenshot 2025-11-20 at 7 42 40 PM" src="https://github.com/user-attachments/assets/4d0054b0-1f5f-43b0-913e-d02b7b464610" />
+<img src="screenshots/minhas-trilhas.png" alt="MinhasTrilhasScreen" width="300" />
+
+### 7. PerfilScreen
+
+<img src="screenshots/perfil.png" alt="PerfilScreen" width="300" />
 
 ## 🎨 Tema e Estilização
 
@@ -174,3 +179,36 @@ https://youtube.com/shorts/373pZBmiqY8?feature=share
 ---
 
 Desenvolvido para FIAP - Mobile Application Development
+
+## 📱 Telas do Aplicativo
+
+### 1. LoginScreen
+
+<img src="screenshots/login.png" alt="LoginScreen" width="300" />
+
+### 2. RegisterScreen (SignUpScreen)
+
+<img src="screenshots/signup.png" alt="SignUpScreen - Dados Pessoais" width="300" />
+
+<img src="screenshots/signup-2.png" alt="SignUpProfileScreen - Perfil Profissional" width="300" />
+
+### 3. HomeScreen (Meu Caminho)
+
+<img src="screenshots/home.png" alt="HomeScreen" width="300" />
+
+### 4. TrilhasScreen
+
+<img src="screenshots/trilhas.png" alt="TrilhasScreen" width="300" />
+
+### 5. TrilhaDetalheScreen
+
+<img src="screenshots/trilha-detalhe.png" alt="TrilhaDetalheScreen" width="300" />
+
+### 6. Minhas Trilhas
+
+<img src="screenshots/minhas-trilhas.png" alt="MinhasTrilhasScreen" width="300" />
+
+### 7. PerfilScreen
+
+<img src="screenshots/perfil.png" alt="PerfilScreen" width="300" />
+
