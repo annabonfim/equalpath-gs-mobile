@@ -13,6 +13,7 @@ O aplicativo não oferece cursos nem vagas; apenas ajuda o usuário a entender q
 
 ### Tela de Cadastro
 ![SignUp Screen](./screenshots/signup.png)
+![SignUp Screen](./screenshots/signup-2.png)
 
 ### Tela Inicial (Home)
 ![Home Screen](./screenshots/home.png)
