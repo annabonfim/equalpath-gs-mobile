@@ -128,49 +128,46 @@ export const TrilhaDetalheScreen = ({ route, navigation }) => {
   const abrirLink = (cursoNome, url) => {
     const isGratuito = cursoNome.includes('[GRATUITO]');
     
-    if (isGratuito) {
-      let plataforma = 'https://www.coursera.org';
-      
-      if (cursoNome.includes('edX') || cursoNome.includes('edx')) {
-        plataforma = 'https://www.edx.org';
+    const getPlataforma = () => {
+      if (url && url.trim() !== '' && url.startsWith('http')) {
+        return url;
+      } else if (cursoNome.includes('Alura') || cursoNome.includes('alura')) {
+        return 'https://www.alura.com.br';
+      } else if (cursoNome.includes('edX') || cursoNome.includes('edx')) {
+        return 'https://www.edx.org';
       } else if (cursoNome.includes('freeCodeCamp') || cursoNome.includes('freecodecamp')) {
-        plataforma = 'https://www.freecodecamp.org';
+        return 'https://www.freecodecamp.org';
       } else if (cursoNome.includes('Trailhead') || cursoNome.includes('trailhead')) {
-        plataforma = 'https://trailhead.salesforce.com';
+        return 'https://trailhead.salesforce.com';
       } else if (cursoNome.includes('FGV') || cursoNome.includes('fgv')) {
-        plataforma = 'https://www5.fgv.br/fgvonline/Cursos/Gratuitos/';
+        return 'https://www5.fgv.br/fgvonline/Cursos/Gratuitos/';
       } else if (cursoNome.includes('Coursera') || cursoNome.includes('coursera')) {
-        plataforma = 'https://www.coursera.org';
-      } else if (url && url !== '') {
-        plataforma = url;
+        return 'https://www.coursera.org';
+      } else if (cursoNome.includes('Udemy') || cursoNome.includes('udemy')) {
+        return 'https://www.udemy.com';
       }
-      
-      Linking.openURL(plataforma).catch(err => 
-        console.error('Erro ao abrir link:', err)
-      );
+      return 'https://www.coursera.org';
+    };
+
+    if (isGratuito) {
+      Linking.openURL(getPlataforma()).catch(err => {
+        console.error('Erro ao abrir link:', err);
+        Alert.alert('Erro', 'Não foi possível abrir o link. Verifique sua conexão com a internet.');
+      });
     } else {
       Alert.alert(
-        'Link de Exemplo',
-        'Este é um link de exemplo para fins acadêmicos. Em uma versão real do app, este link levaria para o curso na plataforma.',
+        'Plataforma Paga',
+        'Este curso está disponível em uma plataforma paga. Você será redirecionado para a página principal da plataforma onde poderá buscar o curso e realizar a inscrição.',
         [
-          { text: 'OK', style: 'default' },
+          { text: 'Cancelar', style: 'cancel' },
           {
             text: 'Abrir plataforma',
             style: 'default',
             onPress: () => {
-              let plataforma = 'https://www.coursera.org';
-              if (url && url.includes('alura')) {
-                plataforma = 'https://www.alura.com.br';
-              } else if (url && url.includes('coursera')) {
-                plataforma = 'https://www.coursera.org';
-              } else if (url && url.includes('udemy')) {
-                plataforma = 'https://www.udemy.com';
-              } else if (url && url !== '') {
-                plataforma = url;
-              }
-              Linking.openURL(plataforma).catch(err => 
-                console.error('Erro ao abrir link:', err)
-              );
+              Linking.openURL(getPlataforma()).catch(err => {
+                console.error('Erro ao abrir link:', err);
+                Alert.alert('Erro', 'Não foi possível abrir o link. Verifique sua conexão com a internet.');
+              });
             }
           }
         ]
