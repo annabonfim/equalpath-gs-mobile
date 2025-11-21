@@ -146,7 +146,7 @@ Este projeto atende aos requisitos da disciplina de Mobile Application Developme
 
 ## 🎥 Vídeo de Demonstração
 
-[Adicione o link do vídeo do YouTube aqui]
+https://youtube.com/shorts/373pZBmiqY8?feature=share 
 
 ---
 
